@@ -5,23 +5,27 @@ import me.cooldown.Configuration;
 import me.cooldown.entities.Cooldown;
 import me.cooldown.entities.User;
 import me.cooldown.interfaces.Browser;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashSet;
 import java.util.Optional;
 
-public class CooldownManager implements Browser<User, Cooldown> {
+public class CooldownManager implements Browser<User, Cooldown>, Listener {
 
     private static final CooldownManager INSTANCE = new CooldownManager();
     @Getter
     private HashSet<User> users;
-    ConnectionManager connectionManager = Configuration.getINSTANCE().getConnectionManager();
+    private ConnectionManager connectionManager = Configuration.getINSTANCE().getConnectionManager();
 
     public CooldownManager() {
         users = new HashSet<>();
     }
 
 
-    public Optional<User> loadUser(String playerName){
+    private Optional<User> loadUser(String playerName){
         Optional<User> user = connectionManager.loadUser(playerName);
         if (!user.isPresent()) {
             user = connectionManager.insertPlayer(new User(playerName));
@@ -38,10 +42,18 @@ public class CooldownManager implements Browser<User, Cooldown> {
     @Override
     public Optional<Cooldown> findCooldownByName(User user, String cooldownName) {
         if (!user.getCooldownable().isPresent()) return Optional.empty();
-        final Optional<Cooldown> first = user.getCooldownable().get().stream().filter(c -> c.getName().equalsIgnoreCase(cooldownName)).findFirst();
-        return first;
+        return user.getCooldownable().get().stream().filter(c -> c.getName().equalsIgnoreCase(cooldownName)).findFirst();
     }
 
+    @EventHandler
+    private void onJoin(PlayerJoinEvent e){
+        loadUser(e.getPlayer().getName());
+    }
+
+    @EventHandler
+    private void onQuit(PlayerQuitEvent e){
+        findByName(e.getPlayer().getName()).ifPresent(User::saveCooldowns);
+    }
 
     public static CooldownManager getINSTANCE() {
         return INSTANCE;

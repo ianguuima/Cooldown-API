@@ -76,10 +76,7 @@ public class ConnectionManager {
 
 
 
-
-
-
-    public boolean playerExists(User user) {
+/*    public boolean playerExists(User user) {
 
         data.openConnection();
         final Connection connection = data.getConnection();
@@ -99,7 +96,7 @@ public class ConnectionManager {
         }
         return false;
 
-    }
+    }*/
 
     public Optional<User> insertPlayer(User user){
         data.openConnection();

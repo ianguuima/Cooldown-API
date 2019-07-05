@@ -37,7 +37,6 @@ public class Cooldown implements Cooldownable {
     public void start() {
         this.whenPut = System.currentTimeMillis();
         isCooldown = true;
-        System.out.println(new Date() + " Cooldown started!");
     }
 
     public void stop(Consumer<Player> consumer){

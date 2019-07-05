@@ -20,23 +20,20 @@ public class Checker extends Thread {
 
             playerCooldowns.getCooldownable().ifPresent(cooldownsList -> {
 
-                cooldownsList.forEach(cooldown -> {
-
-                    cooldown.ifCooldown(activeCooldowns -> {
+                cooldownsList.forEach(cooldown -> cooldown.ifCooldown(activeCooldowns -> {
 
 
-                        long whenPutCooldown = cooldown.getWhenPutCooldown();
-                        long cooldownTime = TimeUnit.SECONDS.toMillis(cooldown.cooldownTime());
-                        long fullTime = whenPutCooldown + cooldownTime;
+                    long whenPutCooldown = cooldown.getWhenPutCooldown();
+                    long cooldownTime = TimeUnit.SECONDS.toMillis(cooldown.cooldownTime());
+                    long fullTime = whenPutCooldown + cooldownTime;
 
 
-                        if (System.currentTimeMillis() >= fullTime) {
-                            System.out.println(new Date() + " Player lost cooldown!");
-                            cooldown.stop();
-                        }
+                    if (System.currentTimeMillis() >= fullTime) {
+                        System.out.println(new Date() + " Player lost cooldown!");
+                        cooldown.stop();
+                    }
 
-                    });
-                });
+                }));
             });
         });
     }
