@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CooldownAPI:jar">
+    <output-path>$USER_HOME$/Área de Trabalho</output-path>
+    <root id="archive" name="CooldownAPI.jar">
+      <element id="module-output" name="CooldownAPI" />
+    </root>
+  </artifact>
+</component>

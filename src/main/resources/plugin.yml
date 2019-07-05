@@ -1,0 +1,4 @@
+name: CooldownAPI
+author: zAryon
+version: 1.0
+main: me.cooldown.CooldownAPI

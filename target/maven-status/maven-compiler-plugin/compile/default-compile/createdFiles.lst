@@ -1,0 +1,17 @@
+me/cooldown/exceptions/ConfigurationError.class
+me/cooldown/interfaces/Cooldownable.class
+me/cooldown/connection/type/ConnectionBase.class
+me/cooldown/connection/type/MySQL.class
+me/cooldown/interfaces/Browser.class
+me/cooldown/Configuration.class
+me/cooldown/enums/ConnectionType.class
+me/cooldown/manager/CooldownManager.class
+me/cooldown/CooldownAPI.class
+me/cooldown/exceptions/DataException.class
+me/cooldown/exceptions/UserNotFound.class
+me/cooldown/entities/Cooldown.class
+me/cooldown/manager/ConnectionManager.class
+me/cooldown/Checker.class
+me/cooldown/manager/ConnectionManager$1.class
+me/cooldown/entities/User.class
+me/cooldown/connection/type/SQLite.class
